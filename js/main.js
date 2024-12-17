@@ -265,7 +265,7 @@
             var nameProduct = $(this).parent().parent().find('.js-name-b1').html();
             $(this).on('click', function(e){
                 e.preventDefault();
-                swal(nameProduct, "is added to cart !", "success");
+                swal(nameProduct, "Đã thêm vào giỏ !", "success");
             });
         });
 
@@ -285,7 +285,7 @@
             var nameProduct = $(this).parent().parent().find('.js-name1').html();
             $(this).on('click', function(e){
                 e.preventDefault();
-                swal(nameProduct, "is added to cart !", "success");
+                swal(nameProduct, "Đã thêm vào giỏ !", "success");
             });
         });
 
@@ -611,6 +611,185 @@
             $(this).parent().parent().parent().find('.js-show-reply-cmt').removeClass('how-active2');
         });
     } catch(er) {console.log(er);}
+    
 
+// JavaScript code to manage cart functionality for the fruit sho
 
 })(jQuery);
+(function ($) {
+    "use strict";
+
+    // Initialize cart array
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Function to render cart items in the header
+    function renderCart() {
+        let cartHeader = $('.cart-header .js-pscroll');
+        cartHeader.empty();
+        let total = 0;
+    
+        // Lặp qua từng item trong giỏ hàng và gán chỉ số index
+        cart.forEach((item, index) => {
+            total += item.price * item.quantity;
+            cartHeader.append(`
+                <div class="flex-w flex-str m-b-25">
+                    <div class="size-w-15 flex-w flex-t">
+                        <a href="product-single.html" class="wrap-pic-w bo-all-1 bocl12 size-w-16 hov3 trans-04 m-r-14">
+                            <img src="${item.image}" alt="${item.name}">
+                        </a>
+                        <div class="size-w-17 flex-col-l">
+                            <a href="product-single.html" class="txt-s-108 cl3 hov-cl10 trans-04">
+                                ${item.name}
+                            </a>
+                            <span class="txt-s-101 cl9">${item.price}$</span>
+                            <span class="txt-s-109 cl12">x${item.quantity}</span>
+                        </div>
+                    </div>
+                    <div class="size-w-14 flex-b">
+                        <button class="lh-10 remove-item" data-index="${index}">
+                            <img src="images/icons/icon-close.png" alt="REMOVE">
+                        </button>
+                    </div>
+                </div>
+            `);
+        });
+    
+        // Cập nhật tổng số sản phẩm
+        $('.icon-header-noti').attr('data-notify', cart.length);
+        $('.txt-m-111.cl6').text(`${total}$`);
+        $('.txt-m-111.cl10').text(`${total}$`);
+        localStorage.setItem('cart', JSON.stringify(cart)); // Lưu lại vào localStorage
+    }
+    
+    
+
+    // Function to add item to the cart
+    $(document).on('click', '.js-addcart-b1', function () {
+        const productCard = $(this).closest('.block1');
+        const name = productCard.find('.js-name-b1').text();
+        const price = parseFloat(productCard.find('.block1-content-more').text().replace('$', ''));
+        const image = productCard.find('img').attr('src');
+
+        // check product
+        const existingItem = cart.find(item => item.name === name);
+        if (existingItem) {
+            existingItem.quantity++;
+        } else {
+            cart.push({ name, price, image, quantity: 1 });
+        }
+
+        // Thông báo và render lại giỏ hàng
+        swal(name, "đã được thêm vào giỏ hàng!", "success");
+        renderCart();
+    });
+
+    // $(document).on('click', '.remove-item', function () {
+    //     console.log("Xóa sản phẩm được click!"); // Kiểm tra xem sự kiện có được kích hoạt không
+    //     const index = $(this).data('index');
+    //     console.log("Chỉ mục của sản phẩm: ", index); // Log ra chỉ mục sản phẩm
+    //     if (index !== undefined) {
+    //         cart.splice(index, 1); // Xóa sản phẩm khỏi mảng cart
+    //         renderCart(); // Cập nhật lại giỏ hàng
+    //     } else {
+    //         console.error("Lỗi: Không thể lấy được index.");
+    //     }
+    // });
+    
+
+    // Xóa localStorage nếu phát hiện dữ liệu không hợp lệ
+    $(document).ready(function () {
+        if (cart.some(item => item.name === "" || item.name === "")) {
+            localStorage.removeItem('cart'); // Xóa giỏ hàng
+            cart = []; // Reset mảng giỏ hàng
+        }
+        renderCart(); // Render giỏ hàng khi tải trang
+    });
+
+})(jQuery);
+
+
+(function ($) {
+    "use strict";
+
+    // Giỏ hàng từ localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Hàm render giỏ hàng trong header
+    function renderCartHeader() {
+        let cartHeader = $('.cart-header .js-pscroll');
+        cartHeader.empty();
+        let totalHeader = 0;
+
+        cart.forEach((item, index) => {
+            totalHeader += item.price * item.quantity;
+            cartHeader.append(`
+                <div class="flex-w flex-str m-b-25">
+                    <div class="size-w-15 flex-w flex-t">
+                        <a href="#" class="wrap-pic-w bo-all-1 bocl12 size-w-16 hov3 trans-04 m-r-14">
+                            <img src="${item.image}" alt="${item.name}">
+                        </a>
+                        <div class="size-w-17 flex-col-l">
+                            <a href="#" class="txt-s-108 cl3 hov-cl10 trans-04">${item.name}</a>
+                            <span class="txt-s-101 cl9">${item.price}$</span>
+                            <span class="txt-s-109 cl12">x${item.quantity}</span>
+                        </div>
+                    </div>
+                </div>
+            `);
+        });
+        $('.icon-header-noti').attr('data-notify', cart.length);
+    }
+
+    // Hàm render giỏ hàng trong phần "Đơn hàng của bạn"
+    function renderOrderSummary() {
+        let orderContainer = $('#order-summary');
+        orderContainer.empty();
+        let subtotal = 0;
+
+        cart.forEach(item => {
+            let totalPrice = item.price * item.quantity;
+            subtotal += totalPrice;
+
+            // Thêm sản phẩm vào phần "Đơn hàng của bạn"
+            orderContainer.append(`
+                <div class="flex-w flex-sb-m txt-s-101 cl6 bo-b-1 bocl15 p-b-21 p-t-18">
+                    <span>${item.name} <img class="m-rl-3" src="images/icons/icon-multiply.png" alt="icon"> ${item.quantity}</span>
+                    <span>${totalPrice}$</span>
+                </div>
+            `);
+        });
+
+        // Cập nhật tổng cộng
+        $('#subtotal').text(`${subtotal}$`);
+        $('#total').text(`${subtotal}$`);
+    }
+
+    $('#checkout-btn').on('click', function () {
+        if (cart.length === 0) {
+            alert("Giỏ hàng của bạn trống!");
+            return;
+        }
+
+        // Hiển thị QR Code thanh toán
+        swal({
+            title: "Mã QR Thanh Toán",
+            text: "Quét mã QR bằng ví Momo để thanh toán.",
+            icon: "images/icons/qrcode-momo.jpg",
+            button: "Hoàn tất"
+        });
+    });
+
+    
+  
+    // Gọi các hàm render khi tải trang
+    $(document).ready(function () {
+        renderCartHeader();
+        renderOrderSummary();
+    });
+
+})(jQuery);
+
+
+
+
+

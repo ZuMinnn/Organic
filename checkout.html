@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Checkout</title>
+	<title>Thanh toán</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -294,11 +294,11 @@
 
 				<span class="txt-m-201 cl0 flex-c-m flex-w">
 					<a href="index.html" class="txt-m-201 cl0 hov-cl10 trans-04 m-r-6">
-						Home
+						Trang chủ
 					</a>
 
 					<span>
-						/ Checkout
+						/ thanh toán
 					</span>
 				</span>
 			</div>
@@ -569,63 +569,42 @@
 						<h4 class="txt-m-124 cl3 p-b-11">
 							Đơn hàng của bạn
 						</h4>
-
+						
+							
+						
 						<div class="flex-w flex-sb-m txt-m-103 cl6 bo-b-1 bocl15 p-b-21 p-t-18">
 							<span>
 								Sản phẩm
 							</span>
 
 							<span>
-								Tổng cộng
+								Đơn giá
 							</span>
 						</div>
-						
-						<!--  -->
-						<div class="flex-w flex-sb-m txt-s-101 cl6 bo-b-1 bocl15 p-b-21 p-t-18">
-							<span>
-								Cherry 
-								<img class="m-rl-3" src="images/icons/icon-multiply.png" alt="icon">
-								2
-							</span>
+						<!-- Phần "Đơn hàng của bạn" -->
+						<div id="order-summary">
+							<div class="order-row flex-w flex-sb-m">
+								<span class="order-product">Dâu tây <span class="quantity">x2</span></span>
+								<span class="order-price">46$</span>
+							</div>
 
-							<span>
-								36$
-							</span>
+							<div class="order-row flex-w flex-sb-m">
+								<span class="order-product">Súp lơ <span class="quantity">x1</span></span>
+								<span class="order-price">19$</span>
+							</div>
 						</div>
 
-						<div class="flex-w flex-sb-m txt-s-101 cl6 bo-b-1 bocl15 p-b-21 p-t-18">
-							<span>
-								Lựu 
-								<img class="m-rl-3" src="images/icons/icon-multiply.png" alt="icon">
-								1
-							</span>
-
-							<span>
-								12$
-							</span>
-						</div>
-						
-						<!--  -->
-						<div class="flex-w flex-m txt-m-103 bo-b-1 bocl15 p-tb-23">
-							<span class="size-w-61 cl6">
-								Tạm  tính
-
-							</span>
-
-							<span class="size-w-62 cl9">
-								48$
-							</span>
+						<!-- Tổng kết -->
+						<div class="summary-row flex-w flex-sb-m">
+							<span class="order-label">Tạm tính</span>
+							<span id="subtotal" class="order-total">65$</span>
 						</div>
 
-						<div class="flex-w flex-m txt-m-103 p-tb-23">
-							<span class="size-w-61 cl6">
-								Tổng cộng
-							</span>
-
-							<span class="size-w-62 cl10">
-								48$
-							</span>
+						<div class="summary-row flex-w flex-sb-m">
+							<span class="order-label">Tổng cộng</span>
+							<span id="total" class="order-total">65$</span>
 						</div>
+
 
 						<div class="bo-all-1 bocl15 p-b-25 m-b-30">
 							<div class="flex-w flex-m bo-b-1 bocl15 p-rl-20 p-tb-16">
@@ -666,8 +645,8 @@
 						</div>
 						
 
-						<button class="flex-c-m txt-s-105 cl0 bg10 size-a-21 hov-btn2 trans-04 p-rl-10">
-							Mua Hàng
+						<button id="checkout-btn"  class="flex-c-m txt-s-105 cl0 bg10 size-a-21 hov-btn2 trans-04 p-rl-10">
+							Thanh Toán
 						</button>
 					</div>
 				</div>

@@ -3922,6 +3922,32 @@ input.num-product::-webkit-inner-spin-button {
 .size-w-75 {
   width: 39%;
 }
+/* Căn chỉnh hàng sản phẩm */
+.order-row, .summary-row {
+  display: flex;
+  justify-content: space-between; /* Đưa các phần tử về 2 phía */
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0; /* Đường kẻ giữa các hàng */
+}
+
+.order-product {
+  text-align: left; /* Căn chữ sản phẩm về bên trái */
+}
+
+.order-price, .order-total {
+  text-align: right; /* Căn tiền về bên phải */
+  min-width: 60px; /* Đảm bảo cột giá có độ rộng cố định */
+}
+
+.quantity {
+  margin-left: 5px; /* Khoảng cách giữa tên sản phẩm và số lượng */
+  color: #888; /* Màu xám nhạt cho số lượng */
+}
+
+.order-label {
+  font-weight: bold;
+  color: #333;
+}
 
 
 /*//////////////////////////////////////////////////////////////////
